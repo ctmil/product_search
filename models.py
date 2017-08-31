@@ -72,4 +72,6 @@ class sale_order_product_search(models.TransientModel):
 	product_id = fields.Many2one('product.product',readonly=True)
 	lst_price = fields.Float('Precio',related='product_id.lst_price',readonly=True)
 	qty_available = fields.Float('Inventario',related='product_id.qty_available',readonly=True)
+	detalles = fields.Char('Detalles',related='product_id.detalles',readonly=True)
+	modelo = fields.Char('Modelo',related='product_id.modelo',readonly=True)
 	selected = fields.Boolean('Seleccionado',default=False)	

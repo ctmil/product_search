@@ -12,16 +12,20 @@
 		</field -->
                 <xpath expr="/form/sheet/notebook" position="inside">
                         <page string="Buscar y Agregar">
-				<group string="Busqueda">
-                                        <button name="product_searchbox" type="object" string="Buscar" />
-                                        <button name="add_products" type="object" string="Agregar" />
-                                        <button name="clear_products" type="object" string="Limpiar" />
+				<group col="4" >
+                                 	<button colspan="2" name="product_searchbox" type="object" string="Buscar" />
+	                                <button colspan="2" name="add_products" type="object" string="Agregar" />
+       		                        <button colspan="2" name="clear_products" type="object" string="Limpiar" />
+				</group>
+				<group col="2" colspan="2">
+                               		<field name="searchbox" />
 				</group>
 				<group string="Productos">
-                                	<field name="searchbox" />
                                         <field name="product_ids" >
 						<tree string="Productos" create="false" delete="false" editable="bottom">
 							<field name="product_id" />
+							<field name="detalles" />
+							<field name="modelo" />
 							<field name="lst_price" />
 							<field name="qty_available" />
 							<field name="selected" />
