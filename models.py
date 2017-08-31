@@ -16,6 +16,7 @@ class sale_order(models.Model):
         _inherit = 'sale.order'
 
 	searchbox = fields.Char('Productos a Buscar')
+	inventory_available = fields.Boolean('Con stock',default=False)
 	product_ids = fields.One2many(comodel_name='sale.order.product_search',inverse_name='order_id')
 
 	@api.multi
@@ -55,14 +56,19 @@ class sale_order(models.Model):
 			#sql = "select a.id,b.id,b.name from product_product a inner join product_template b on a.product_tmpl_id = b.id where upper(b.name) like '%" + \
 			#	self.searchbox.upper() + "%'"
 			sql = "select a.id,b.id,b.name from product_product a inner join product_template b on a.product_tmpl_id = b.id where '"+ \
-				self.searchbox + "' % name or '" + self.searchbox + "' % detalles or '" + self.searchbox + "' % modelo"
+					self.searchbox + "' % name or '" + self.searchbox + "' % detalles or '" + self.searchbox + "' % modelo"
+				
 			self.env.cr.execute(sql)
 			for a_id, b_id, b_name in self.env.cr.fetchall():
 				vals = {
 					'order_id': self.id,
 					'product_id': a_id 
-					}	
-				line_id = self.env['sale.order.product_search'].create(vals)	
+					}
+				product = self.env['product.product'].browse(a_id)
+				if self.inventory_available and product.qty_available > 0:	
+					line_id = self.env['sale.order.product_search'].create(vals)
+				if not self.inventory_available:	
+					line_id = self.env['sale.order.product_search'].create(vals)
 	
 
 class sale_order_product_search(models.TransientModel):

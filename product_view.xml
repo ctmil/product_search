@@ -19,6 +19,7 @@
 				</group>
 				<group col="2" colspan="2">
                                		<field name="searchbox" />
+                               		<field name="inventory_available" />
 				</group>
 				<group string="Productos">
                                         <field name="product_ids" >
