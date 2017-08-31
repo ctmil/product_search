@@ -55,7 +55,7 @@ class sale_order(models.Model):
 			#sql = "select a.id,b.id,b.name from product_product a inner join product_template b on a.product_tmpl_id = b.id where upper(b.name) like '%" + \
 			#	self.searchbox.upper() + "%'"
 			sql = "select a.id,b.id,b.name from product_product a inner join product_template b on a.product_tmpl_id = b.id where '"+ \
-				self.searchbox + "' % name"
+				self.searchbox + "' % name or '" + self.searchbox + "' % detalles or '" + self.searchbox + "' % modelo"
 			self.env.cr.execute(sql)
 			for a_id, b_id, b_name in self.env.cr.fetchall():
 				vals = {
