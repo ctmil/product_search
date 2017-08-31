@@ -45,6 +45,7 @@ class sale_order(models.Model):
 	def clear_products(self):
 		self.ensure_one()
 		self.searchbox = ''
+		self.inventory_available = False
 		for product in self.product_ids:
 			product.unlink()
 
