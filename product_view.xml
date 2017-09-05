@@ -25,8 +25,8 @@
                                         <field name="product_ids" >
 						<tree string="Productos" create="false" delete="false" editable="bottom">
 							<field name="product_id" />
-							<field name="detalles" />
-							<field name="modelo" />
+							<!-- field name="detalles" />
+							<field name="modelo" / -->
 							<field name="lst_price" />
 							<field name="qty_available" />
 							<field name="selected" />
